@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="New Inventory Item"
+             x:Class="TaxCalc.Views.NewItemPage">
+    <ContentPage.Content>
+        <StackLayout Padding="5">
+            <Label Text="Name"/>
+            <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                <Entry TextChanged="NameInput_TextChanged" Placeholder="Enter Name Here..." x:Name="NameInput"></Entry>
+            </Frame>
+            <Label Text="Description"/>
+            <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                <Editor HeightRequest="80" TextChanged="DescriptionInput_TextChanged" Placeholder="Enter Name Here..." x:Name="DescriptionInput"></Editor>
+            </Frame>
+            <Label Text="Unit Price"/>
+            <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalOptions="CenterAndExpand" FontSize="20" Text="$"/>
+                    <Entry HorizontalOptions="FillAndExpand" TextChanged="UnitPriceInput_TextChanged" Keyboard="Numeric" Placeholder="Enter Price Here..." x:Name="UnitPriceInput"></Entry>
+                </StackLayout>
+            </Frame>
+            <Button Text="Save" x:Name="SaveBtn" Clicked="SaveBtn_Clicked"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

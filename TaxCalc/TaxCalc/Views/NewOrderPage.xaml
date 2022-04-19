@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Create New Order"
+             x:Class="TaxCalc.Views.NewOrderPage">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout Padding="5">
+                    <Label Margin="10, 15" FontSize="30" Text="Customer Info:"/>
+                    <BoxView BackgroundColor="LightGray" HeightRequest="2"></BoxView>
+
+                    <Label Text="First Name"></Label>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry TextChanged="FirstNameInput_TextChanged" Placeholder="Enter First Name Here..." x:Name="FirstNameInput"></Entry>
+                    </Frame>
+                    <Label Text="Last Name"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry TextChanged="LastNameInput_TextChanged" Placeholder="Enter Last Name Here..." x:Name="LastNameInput"></Entry>
+                    </Frame>
+                    <Label Margin="10, 15" FontSize="20" Text="Customer Address:"/>
+                    <BoxView BackgroundColor="LightGray" HeightRequest="1"></BoxView>
+                    <Label Text="Street Address"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry TextChanged="Street1Input_TextChanged" Placeholder="Enter Street Address Here..." x:Name="Street1Input"></Entry>
+                    </Frame>
+                    <Label Text="Suite, Apt, etc."/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry TextChanged="Street2Input_TextChanged" Placeholder="Enter Suite/Apt Here..." x:Name="Street2Input"></Entry>
+                    </Frame>
+                    <Label Text="City"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry TextChanged="CityInput_TextChanged" Placeholder="Enter City Here..." x:Name="CityInput"></Entry>
+                    </Frame>
+                    <Label Text="State"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry TextChanged="StateInput_TextChanged" Placeholder="Enter State Here..." x:Name="StateInput"></Entry>
+                    </Frame>
+                    <Label Text="Zip"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry TextChanged="ZipInput_TextChanged" Placeholder="Enter Zip Here..." Keyboard="Numeric" x:Name="ZipInput"></Entry>
+                    </Frame>
+                    <Label Text="Country"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry TextChanged="CountryInput_TextChanged" Placeholder="Enter Country Here..." MaxLength="2" x:Name="CountryInput"></Entry>
+                    </Frame>
+                    <Label Margin="10, 15" FontSize="30" Text="Order Info:"/>
+                    <BoxView BackgroundColor="LightGray" HeightRequest="2"></BoxView>
+                    <Label Text="Ship From"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Picker x:Name="CompanyAddressesPicker" SelectedIndexChanged="CompanyAddressesPicker_SelectedIndexChanged" Title="Ship From Location" ItemDisplayBinding="{Binding Name}"></Picker>
+                    </Frame>
+                    <Label Text="Shipping Charges"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <StackLayout Padding="5,0" Orientation="Horizontal">
+                            <Label FontSize="20" VerticalOptions="CenterAndExpand" Text="$"></Label>
+                            <Entry Placeholder="0.00" Keyboard="Numeric" Unfocused="ShippingCostInput_Unfocused" HorizontalOptions="FillAndExpand" x:Name="ShippingCostInput"></Entry>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Padding="5">
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label VerticalOptions="CenterAndExpand" Text="Line Items"/>
+                                <Button x:Name="AddNewLineItemBtn" Clicked="AddNewLineItemBtn_Clicked" HorizontalOptions="EndAndExpand" Text="Add New Item" VerticalOptions="CenterAndExpand"></Button>
+                            </StackLayout>
+                            <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                                <ListView HasUnevenRows="True" SelectionMode="None" HeightRequest="400" x:Name="LineItemsListView">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <ViewCell.ContextActions>
+                                                    <MenuItem x:Name="DeleteLineItemBtn" Clicked="DeleteLineItemBtn_Clicked" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True"></MenuItem>
+                                                </ViewCell.ContextActions>
+                                                <Frame BorderColor="Gray" CornerRadius="5">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Text="{Binding LineItem.Name}" FontSize="15" TextColor="Black"/>
+                                                        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Text="{Binding LineQtyDisplay}" FontSize="15" TextColor="Gray"/>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </Frame>
+                            <StackLayout Padding="10">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label FontAttributes="Bold" HorizontalOptions="EndAndExpand" Text="Subtotal:"></Label>
+                                    <Label x:Name="OrderSubtotalLabel" WidthRequest="75" HorizontalOptions="End"></Label>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label FontAttributes="Bold" HorizontalOptions="EndAndExpand" Text="Shipping:"></Label>
+                                    <Label x:Name="OrderShippingLabel" WidthRequest="75" HorizontalOptions="End"></Label>
+                                </StackLayout>
+                                <!--
+                                <StackLayout Orientation="Horizontal">
+                                    <Label FontAttributes="Bold" HorizontalOptions="EndAndExpand" Text="Taxes:"></Label>
+                                    <Label x:Name="OrderTaxesLabel" WidthRequest="75" HorizontalOptions="End"></Label>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label FontAttributes="Bold" HorizontalOptions="EndAndExpand" Text="Total:"></Label>
+                                    <Label x:Name="OrderTotalLabel" WidthRequest="75" HorizontalOptions="End"></Label>
+                                </StackLayout>
+                                -->
+                            </StackLayout>
+                            
+                        </StackLayout>
+                    </Frame>
+                    <Button x:Name="ReviewOrderBtn" Clicked="ReviewOrderBtn_Clicked" Text="Review Order"></Button>
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout x:Name="ModalBackdrop" IsVisible="False" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="0.8" BackgroundColor="DarkGray"></StackLayout>
+            <StackLayout x:Name="ModalContainer" IsVisible="False" AbsoluteLayout.LayoutFlags="All" Padding="40,100" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="1" BackgroundColor="Transparent" >
+                <Frame Opacity="1" BackgroundColor="White" CornerRadius="10" WidthRequest="250" HorizontalOptions="Center" VerticalOptions="Center">
+                    <StackLayout>
+                        <Label Text="Add New Line Item" FontSize="25" HorizontalTextAlignment="Center"/>
+                        <Label Text="Item To Add"/>
+                        <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                            <Picker Title="Select an Item" x:Name="ItemPicker" ItemDisplayBinding="{Binding Name}"></Picker>
+                        </Frame>
+                        <Label Text="Quantity To Order"/>
+                        <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                            <Entry Placeholder="Enter Qty Here..." Keyboard="Numeric" x:Name="QtyInput"></Entry>
+                        </Frame>
+                        <StackLayout Orientation="Horizontal">
+                            <Button HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource Accent}" VerticalOptions="CenterAndExpand" x:Name="CancelAddLineBtn" Clicked="CancelAddLineBtn_Clicked" Text="Cancel"></Button>
+                            <Button HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" x:Name="SaveLineBtn" Clicked="SaveLineBtn_Clicked" Text="Add Item"></Button>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+
+            <StackLayout x:Name="ReviewOrderModalContainer" IsVisible="False" AbsoluteLayout.LayoutFlags="All" Padding="40,100" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="1" BackgroundColor="Transparent" >
+                <Frame Opacity="1" BackgroundColor="White" CornerRadius="10" WidthRequest="250" HorizontalOptions="Center" VerticalOptions="Center">
+                    <StackLayout>
+                        <Label Text="Order Details" FontSize="25" HorizontalTextAlignment="Center"/>
+                        <BoxView BackgroundColor="LightGray" HeightRequest="2"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Total Items On Order" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label x:Name="NumItemsOnOrderLabel" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Total Items Cost" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label x:Name="NumItemsCostLabel" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Shipping Costs" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label x:Name="ReviewShippingCostsLabel" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Taxes" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label x:Name="ReviewOrderTaxesLabel" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Total Cost Due" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                            <Label x:Name="TotalCostDueLabel" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                        <Button Text="Close" x:Name="CloseReviewOrderModalBtn" Clicked="CloseReviewOrderModalBtn_Clicked"></Button>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

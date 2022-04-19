@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="New Address"
+             x:Class="TaxCalc.Views.NewAddressPage">
+    <ContentPage.Content>
+        <StackLayout Padding="5">
+            <Label Text="Name"/>
+            <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                <Entry TextChanged="NameInput_TextChanged" Placeholder="Enter Name Here..." x:Name="NameInput"></Entry>
+            </Frame>
+            <Label Text="Street Address"/>
+            <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                <Entry TextChanged="Street1Input_TextChanged" Placeholder="Enter Street Address Here..." x:Name="Street1Input"></Entry>
+            </Frame>
+            <Label Text="Suite, Apt etc."/>
+            <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                <Entry TextChanged="Street2Input_TextChanged" Placeholder="Enter Suite/Apt Here..." x:Name="Street2Input"></Entry>
+            </Frame>
+            <Label Text="City"/>
+            <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                <Entry TextChanged="CityInput_TextChanged" Placeholder="Enter City Here..." x:Name="CityInput"></Entry>
+            </Frame>
+            <Label Text="State"/>
+            <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                <Entry TextChanged="StateInput_TextChanged" Placeholder="Enter State Here..." x:Name="StateInput"></Entry>
+            </Frame>
+            <Label Text="Zip"/>
+            <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                <Entry TextChanged="ZipInput_TextChanged" Keyboard="Numeric" Placeholder="Enter Zip Here..." x:Name="ZipInput"></Entry>
+            </Frame>
+            <Label Text="Country"/>
+            <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                <Entry TextChanged="CountryInput_TextChanged" MaxLength="2" Placeholder="Enter Country Code Here..." x:Name="CountryInput"></Entry>
+            </Frame>
+            <Button Text="Save" x:Name="SaveAddressBtn" Clicked="SaveAddressBtn_Clicked"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

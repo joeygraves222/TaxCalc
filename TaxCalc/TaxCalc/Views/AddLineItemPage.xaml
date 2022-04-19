@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaxCalc.Views.AddLineItemPage">
+    <ContentPage.Content>
+        <Frame BackgroundColor="White" CornerRadius="10" WidthRequest="250" HorizontalOptions="Center" VerticalOptions="Center">
+            <StackLayout>
+                <Label Text="Add New Line Item" FontSize="25" HorizontalTextAlignment="Center"/>
+                <Label Text="Item To Add"/>
+                <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                    <Picker Title="Select an Item" x:Name="ItemPicker" ItemDisplayBinding="{Binding Name}"></Picker>
+                </Frame>
+                <Label Text="Quantity To Order"/>
+                <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                    <Entry Placeholder="Enter Qty Here..." Keyboard="Numeric" x:Name="QtyInput"></Entry>
+                </Frame>
+                <StackLayout Orientation="Horizontal">
+                    <Button HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource Accent}" VerticalOptions="CenterAndExpand" x:Name="CancelBtn" Clicked="CancelBtn_Clicked" Text="Cancel"></Button>
+                    <Button HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" x:Name="AddLineBtn" Clicked="AddLineBtn_Clicked" Text="Add Item"></Button>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

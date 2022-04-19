@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Tax Rates"
+             x:Class="TaxCalc.Views.TaxRatesPage">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout Padding="5">
+                    <Label Text="Enter an address to check the tax rates for that location" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center"/>
+                    <BoxView BackgroundColor="LightGray" HeightRequest="2" Margin="0,15"/>
+                    <Label Text="Street Address:"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry x:Name="Street1Input" Placeholder="Enter Street Address Here..." TextChanged="Street1Input_TextChanged" />
+                    </Frame>
+                    <Label Text="City:"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry x:Name="CityInput" Placeholder="Enter City Here..." TextChanged="CityInput_TextChanged" />
+                    </Frame>
+                    <Label Text="State:"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry x:Name="StateInput" Placeholder="Enter State Here..." TextChanged="StateInput_TextChanged" />
+                    </Frame>
+                    <Label Text="Zip:"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry x:Name="ZipInput" Placeholder="Enter Zip Here..." TextChanged="ZipInput_TextChanged" />
+                    </Frame>
+                    <Label Text="Country:"/>
+                    <Frame Padding="5" BorderColor="LightGray" CornerRadius="5">
+                        <Entry x:Name="CountryInput" MaxLength="2" Placeholder="Enter Country Code Here..." TextChanged="CountryInput_TextChanged" />
+                    </Frame>
+                    <Button Text="Get Rates" x:Name="GetRatesBtn" Clicked="GetRatesBtn_Clicked"></Button>
+                </StackLayout>
+            </ScrollView>
+            
+            <StackLayout x:Name="ModalBackdrop" IsVisible="False" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="0.8" BackgroundColor="DarkGray"></StackLayout>
+            <StackLayout x:Name="ResultsModalContainer" IsVisible="False" AbsoluteLayout.LayoutFlags="All" Padding="40,100" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="1" BackgroundColor="Transparent" >
+                <Frame Opacity="1" BackgroundColor="White" CornerRadius="10" WidthRequest="250" HorizontalOptions="Center" VerticalOptions="Center">
+                    <StackLayout>
+                        <Label Text="Tax Rates" FontSize="25" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                        <BoxView BackgroundColor="LightGray" HeightRequest="2" Margin="0,10"/>
+                        <Label Text="Address:"/>
+                        <Frame BorderColor="LightGray" CornerRadius="5" Padding="5">
+                            <Label HeightRequest="70" x:Name="ResultsAddressLabel"/>
+                        </Frame>
+
+                        <Label Text="Rates:"/>
+                        <Frame BorderColor="LightGray" CornerRadius="5" Padding="5">
+                            <Label HeightRequest="90" x:Name="ResultsRatesLabel"/>
+                        </Frame>
+                        <Button HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource Accent}" VerticalOptions="CenterAndExpand" x:Name="CloseResultsModalBtn" Clicked="CloseResultsModalBtn_Clicked" Text="Close"></Button>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

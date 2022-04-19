@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaxCalc.Views.ItemsPage"
+             Title="Inventory Items"
+             xmlns:local="clr-namespace:TaxCalc.ViewModels"  
+             xmlns:model="clr-namespace:TaxCalc.Models"  
+             x:Name="BrowseItemsPage">
+
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Padding="5">
+                <ListView ItemTapped="ItemsListView_ItemTapped" SelectionMode="None" HasUnevenRows="True" x:Name="ItemsListView" ItemsSource="{Binding InventoryItems}" Refreshing="ItemsListView_Refreshing" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0,1,1" IsPullToRefreshEnabled="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
+                                        <StackLayout Orientation="Horizontal">
+                                            <StackLayout>
+                                                <Label FontSize="20" Text="{Binding Name}"></Label>
+                                                <Label Text="{Binding Description}"></Label>
+                                            </StackLayout>
+                                            <Label VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Text="{Binding UnitPriceDisplay}"></Label>
+                                        </StackLayout>
+                                    </Frame>
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <Button x:Name="AddItemBtn" Clicked="AddItemBtn_Clicked" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.9,0.95,60,60" CornerRadius="30" BackgroundColor="{StaticResource Accent}" FontFamily="Material" Text="&#xe145;" FontSize="40"></Button>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

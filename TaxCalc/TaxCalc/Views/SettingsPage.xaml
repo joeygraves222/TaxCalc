@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Addresses"
+             x:Class="TaxCalc.Views.SettingsPage">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Padding="5">
+                <ListView ItemTapped="AddressesListView_ItemTapped" SelectionMode="None" HasUnevenRows="True" x:Name="AddressesListView" ItemsSource="{Binding CompanyAddresses}" Refreshing="AddressesListView_Refreshing" AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0,1,1" IsPullToRefreshEnabled="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
+                                        <StackLayout>
+                                            <Label FontSize="20" Text="{Binding Name}"></Label>
+                                        </StackLayout>
+                                    </Frame>
+
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+            </StackLayout>
+            <Button x:Name="AddAddressBtn" Clicked="AddAddressBtn_Clicked" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.9,0.95,60,60" CornerRadius="30" BackgroundColor="{StaticResource Accent}" FontFamily="Material" Text="&#xe145;" FontSize="40"></Button>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
