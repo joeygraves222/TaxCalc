@@ -33,7 +33,7 @@ namespace TaxCalc.Services
                 var responseText = await response.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<TaxJarTaxesResponse>(responseText);
 
-                return Convert.ToDecimal(result.tax.taxable_amount);
+                return Convert.ToDecimal(result.tax.amount_to_collect);
             }
             else
             {
